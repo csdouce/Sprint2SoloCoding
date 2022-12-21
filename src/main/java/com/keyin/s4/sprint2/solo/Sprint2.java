@@ -1,5 +1,6 @@
 package com.keyin.s4.sprint2.solo;
 
+import java.sql.SQLSyntaxErrorException;
 import java.util.Scanner;
 import java.util.TreeSet;
 
@@ -16,7 +17,7 @@ public class Sprint2 {
         Scanner in = new Scanner(System.in);
 
         while(keepGoing){
-            System.out.println("1. Enter an array of numbers to be added to a tree");
+            System.out.println("1. Enter a new array of numbers to be added to a tree");
 
             if(toDisplay){
                 System.out.println("2. Add an element to tree");
@@ -34,9 +35,12 @@ public class Sprint2 {
             if(userChoice == 1){
                 in.nextLine();
 
-                System.out.println("Enter an array of numbers, separated by a comma!");
+                do{
+                    System.out.println();
+                    System.out.println("Enter a new array of numbers, separated by a comma!");
+                    userChoiceString = in.nextLine();
+                } while(userChoiceString == "");
 
-                userChoiceString = in.nextLine();
 
                 bst = createBSTTree(userChoiceString);
 
@@ -57,9 +61,10 @@ public class Sprint2 {
                     // Add an element to Array
                     System.out.println("Added element " + userChoice + " to tree");
                     System.out.println("Here is the updated tree: " + bst);
+                    System.out.println();
                 }
 
-                if(userChoice == 3){
+                else if(userChoice == 3){
                     // Delete an element from Array
                     System.out.println("Enter the element you wish to delete from the tree: ");
                     userChoice = in.nextInt();
@@ -68,16 +73,19 @@ public class Sprint2 {
 
                     System.out.println("Deleted element " + userChoice + " from tree");
                     System.out.println("Here is the updated sorted tree: " + bst);
+                    System.out.println();
                 }
 
-                if(userChoice == 4){
+                else if(userChoice == 4){
                     // Display the highest value in tree
                     System.out.println("The highest value stored in the tree is: " + bst.pollLast());
+                    System.out.println();
                 }
 
-                if(userChoice == 5){
+                else if(userChoice == 5){
                     // Display lowest value in tree
                     System.out.println("The lowest value stored in the tree is: " + bst.pollFirst());
+                    System.out.println();
                 }
             }
 
@@ -85,6 +93,7 @@ public class Sprint2 {
                 exit(0);
             } else {
                 System.out.println("You entered an incorrect value, please re-enter!");
+                System.out.println();
             }
         }
     }
@@ -102,6 +111,7 @@ public class Sprint2 {
         }
 
         System.out.println("Entered Sorted Array with values of: " + bst);
+        System.out.println();
         return bst;
     }
 }

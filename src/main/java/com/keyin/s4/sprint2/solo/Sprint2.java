@@ -11,6 +11,7 @@ public class Sprint2 {
         boolean keepGoing = true;
         boolean toDisplay = false;
         int userChoice;
+        String userChoiceString;
         TreeSet<Integer> bst = new TreeSet<>();
         Scanner in = new Scanner(System.in);
 
@@ -20,6 +21,8 @@ public class Sprint2 {
             if(toDisplay){
                 System.out.println("2. Add an element to tree");
                 System.out.println("3. Delete an element from tree");
+                System.out.println("4. Highest value in tree");
+                System.out.println("5. Lowest value in tree");
             }
 
             System.out.println("9. Exit Program");
@@ -29,7 +32,13 @@ public class Sprint2 {
 
             // Loading the method that user chooses
             if(userChoice == 1){
-                bst = createBSTTree();
+                in.nextLine();
+
+                System.out.println("Enter an array of numbers, separated by a comma!");
+
+                userChoiceString = in.nextLine();
+
+                bst = createBSTTree(userChoiceString);
 
                 if(bst.size() != 0){
                     toDisplay = true;
@@ -60,6 +69,16 @@ public class Sprint2 {
                     System.out.println("Deleted element " + userChoice + " from tree");
                     System.out.println("Here is the updated sorted tree: " + bst);
                 }
+
+                if(userChoice == 4){
+                    // Display the highest value in tree
+                    System.out.println("The highest value stored in the tree is: " + bst.pollLast());
+                }
+
+                if(userChoice == 5){
+                    // Display lowest value in tree
+                    System.out.println("The lowest value stored in the tree is: " + bst.pollFirst());
+                }
             }
 
             else if(userChoice == 9){
@@ -70,16 +89,11 @@ public class Sprint2 {
         }
     }
 
-    static TreeSet<Integer> createBSTTree(){
-        String userEnteredValue;
+    public static TreeSet<Integer> createBSTTree(String userEnteredValue){
         String[] userArray;
         TreeSet<Integer> bst = new TreeSet<>();
-        Scanner in = new Scanner(System.in);
-
-        System.out.println("Enter an array of numbers, separated by a comma!");
 
         // Getting user input and changing to string array
-        userEnteredValue = in.nextLine();
         userArray = userEnteredValue.split(", ");
 
         // Changing from String to Int and adding to tree
